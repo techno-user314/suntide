@@ -25,16 +25,7 @@ import pandas as pd
 
 from suntimes import sunrise_set
 from tides import get_tides
-
-YEAR = 2025
-
-# Lat, long coords. What location to get sunrise/set times for
-SUN_LOC = [60.48, -161.46]
-
-#NOAA station ID's that determine where tides are pulled from
-LOCATIONS = [9466477, #NOAA station ID for Bethel, AK,
-             9465831, #NOAA station ID for Quinhagak, AK,
-             8467373] #NOAA station ID for Togaik, AK
+from settings import YEAR, SUN_LOC, LOCATIONS
 
 def days_in_month(year, month):
     days_in_months = [None,31,28,31,30,31,30,31,31,30,31,30,31]
