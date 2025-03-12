@@ -1,5 +1,7 @@
-# SunTide v3.0.0
-A script to generate .csv files with data containing day-by-day tide predictions and daylight information for a given year. :sunny: :ocean:  
+# SunTide  :sunny: :ocean:  
+<sup> v3.0.0 </sup>  
+  
+A script to generate .csv files with data containing day-by-day tide predictions and daylight information for a given year.
 
 
 ### The Suntimes CSV
