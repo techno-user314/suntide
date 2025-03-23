@@ -40,6 +40,3 @@ def get_year():
         elif user_says.lower() == "next":
             print(f"Fetching data for {this_year+1}...")
             return this_year+1
-
-init()
-print(type(get_year()))
