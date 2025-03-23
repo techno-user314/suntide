@@ -25,7 +25,14 @@ import pandas as pd
 
 from suntimes import sunrise_set
 from tides import get_tides
-from settings import YEAR, SUN_LOC, LOCATIONS
+import ui
+
+ui.init()
+YEAR = ui.get_year()
+SUN_LOC = [60.48, -161.46]
+LOCATIONS = [9466477,
+             9465831,
+             8467373]
 
 def days_in_month(year, month):
     days_in_months = [None,31,28,31,30,31,30,31,31,30,31,30,31]
