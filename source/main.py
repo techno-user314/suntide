@@ -22,6 +22,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 from datetime import datetime, timedelta
 
 import pandas as pd
+import pytz
 
 from suntimes import sunrise_set
 from tides import get_tides
@@ -30,6 +31,7 @@ import ui
 ui.init()
 YEAR = ui.get_year()
 SUN_LOC = [60.48, -161.46]
+TIMEZONE = 'US/Alaska'
 LOCATIONS = [9466477,
              9465831,
              8467373]
@@ -48,14 +50,21 @@ for month in range(1,13):
     for day in range(1, days_in_month(YEAR, month)+1):
         today = datetime(YEAR, month, day)
 
-        sunrise = sunrise_set(SUN_LOC[0], SUN_LOC[1],
-                              today, True, tz_offset=-9)
-        sunset = sunrise_set(SUN_LOC[0], SUN_LOC[1],
-                             today, False, tz_offset=-9)
+        # Get Timezone + Daylight Savings Time offset
+        timezone = pytz.timezone(TIMEZONE)
+        time_offset = timezone.utcoffset(today).total_seconds() / (60 * 60)
 
+        # Get sunrise and sunset datetimes
+        sunrise = sunrise_set(SUN_LOC[0], SUN_LOC[1],
+                              today, True, tz_offset=time_offset)
+        sunset = sunrise_set(SUN_LOC[0], SUN_LOC[1],
+                             today, False, tz_offset=time_offset)
+
+        # Get daylight duration
         dur = sunset - sunrise
         duration = str(dur).split(":")[0] + ":" + str(dur).split(":")[1]
 
+        # Get differance in daylight, as compared with yesterday
         yesterday = today - timedelta(days=1)
         sunrisey = sunrise_set(SUN_LOC[0], SUN_LOC[1],
                                yesterday, True, tz_offset=-9)
