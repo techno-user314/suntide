@@ -11,7 +11,7 @@ Steps to install SunTide:
 3. Download this repository.
    
 ## Using the Program
-To use the program, simply run main.py with a Python 3.11+ interperator. A terminal will open, and the user will asked if they want data for the current year, or next year. Type either 'this' or 'next' and press ENTER. The program will then compile the spreadsheets.  
+To use the program, simply run main.py with a Python 3.11+ interperator. A terminal will open, and the you will be asked if you want data for the current year, or next year. Type either 'this' or 'next' and press ENTER. The program will then compile the spreadsheets automatically.  
 > [!TIP]
 > Be aware that there are a couple other settings, defined as constants in main.py. Different locations can be selected as the source of the data by changing these:
 > - Sun Location - The location to use to generate sunrise and sunset times in latitude/longitude coordinates. If this is changed, the timezone variable must change to match where the coordinates are pointing to.
