@@ -11,6 +11,7 @@ A program to generate .csv files with data containing day-by-day tide prediction
   
 ### Adjusting Settings  
 There are four settings that can be adjusted in the program that determine what data is compiled for the spreadsheets.
+![Screenshot of SunTide program window](/screenshots/Program_Screenshot.png)
 1. **The year**
     - Effect: Determines what time window the program pulls data for.
     - Range: Either the current year or next year.
@@ -38,6 +39,7 @@ There are four settings that can be adjusted in the program that determine what 
 > For reference use only. Use at your own risk.
    
 ### The Suntimes CSV
+![Screenshot of output for daylight spreadsheet](/screenshots/Daylight_Output.png)
 Contains information such as sunrise and sunset times for every day in the year.
 One row per day. The column headers are as follows:  
   
@@ -54,6 +56,7 @@ One row per day. The column headers are as follows:
 > Daylight related times are calculated using the U.S. Naval Observeratory's algorithm.
   
 ### The Tides CSV
+![Screenshot of output for tides spreadsheet](/screenshots/Tide_Output.png)
 Contains information such as tide height for every day in the year.
 One row per tide (every day is assigned four rows, but because not every day of the year has four tide changes, some rows will be empty).  
 The column headers are as follows:  
