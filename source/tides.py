@@ -1,6 +1,6 @@
 """
 Function that uses the National Oceanic and Atmospheric Administration's
-tide predictions API to retreive tide predictions.
+tide predictions API to retrieve tide predictions.
 
 NOAA API docs:
 https://api.tidesandcurrents.noaa.gov/api/prod/
@@ -60,4 +60,4 @@ def get_tides(station_id, date_start, date_end):
         data = response.json()
         return data["predictions"]
     else:
-        raise APIFailure("Unable to returieve data from API")
+        raise APIFailure("Unable to retrieve data from API")
