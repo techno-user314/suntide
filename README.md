@@ -31,7 +31,7 @@ There are four settings that can be adjusted in the program that determine what 
 
 ### Compiling the data
 1. Once the settings are to your liking, click the 'Generate Spreadsheets' button.
-2. The program will take 2-5 minutes to compile the data, and will save the spreasheets in the same folder that the program is located in.
+2. The program will take 2-5 minutes to compile the data, and will save the spreadsheets in the same folder that the program is located in.
   
 ## The Output  
 > [!CAUTION]
