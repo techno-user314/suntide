@@ -29,7 +29,7 @@ import pytz
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
 from PyQt6.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QHBoxLayout,
-    QRadioButton, QDoubleSpinBox, QLabel,
+    QRadioButton, QDoubleSpinBox, QLabel, QTextBrowser,
     QComboBox, QPushButton, QListWidget, QSpinBox,
     QMessageBox, QProgressBar, QGroupBox, QFrame, QDialog
 )
@@ -60,52 +60,52 @@ class InputApp(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("SunTide - Daylight and Tide Predictions")
-        self.setStyleSheet("""/* Global background */
-                               QWidget {
-                                   background-color: #eeeeee; 
-                                   font-size: 12pt;
-                               }
-
-                               /* Buttons */
-                               QPushButton {
-                                   background-color: #eeeeee;
-                                   color: black;
-                                   border: 1px dotted #555555;
-                                   border-radius: 6px;
-                                   padding: 6px 6px;
-                                   font-size: 11pt;
-                               }
-                               QPushButton:hover {
-                                   color: black;
-
-                                   border: 1px solid #555555;
-                               }
-
-                               /* Entry fields */
-                               QLineEdit, QDoubleSpinBox, QSpinBox, QComboBox, QRadioButton, QListWidget {
-                                   background-color: #f0f0f0;
-                               }
-                               QRadioButton, QListWidget {
-                                    border: 1px solid #565656;
-                                   border-radius: 6px;
-                                   padding: 6px;
-                               }
-
-                               /* Group boxes */
-                               QGroupBox {
-                                   border: 1px solid #000000;
-                                   border-radius: 6px;
-                                   margin-top: 10px;
-                                   padding: 6px;
-                                   font-weight: bold;
-                               }
-                               QGroupBox::title {
-                                   font-weight: bold;
-                                   subcontrol-origin: margin;
-                                   subcontrol-position: top left;
-                                   padding: 0 6px;
-                               }
-                           """)
+        self.setStyleSheet("""
+               /* Global background */
+               QWidget {
+                   background-color: #eeeeee; 
+                   font-size: 12pt;
+               }
+        
+               /* Buttons */
+               QPushButton {
+                   background-color: #eeeeee;
+                   color: black;
+                   border: 1px dotted #555555;
+                   border-radius: 6px;
+                   padding: 6px 6px;
+                   font-size: 11pt;
+               }
+               QPushButton:hover {
+                   color: black;
+        
+                   border: 1px solid #555555;
+               }
+        
+               /* Entry fields */
+               QLineEdit, QDoubleSpinBox, QSpinBox, QComboBox, QRadioButton, QListWidget {
+                   background-color: #f0f0f0;
+               }
+               QRadioButton, QListWidget {
+                    border: 1px solid #565656;
+                   border-radius: 6px;
+                   padding: 6px;
+               }
+        
+               /* Group boxes */
+               QGroupBox {
+                   border: 1px solid #000000;
+                   border-radius: 6px;
+                   margin-top: 10px;
+                   padding: 6px;
+                   font-weight: bold;
+               }
+               QGroupBox::title {
+                   font-weight: bold;
+                   subcontrol-origin: margin;
+                   subcontrol-position: top left;
+                   padding: 0 6px;
+               }""")
         self.resize(800, 400)
 
         # -------- MAIN LAYOUT --------
@@ -226,20 +226,20 @@ class InputApp(QWidget):
         self.confirm_button = QPushButton("Generate Spreadsheets")
         self.confirm_button.clicked.connect(self.confirm_selection)
         self.confirm_button.setStyleSheet("""
-                               QPushButton {
-                                   background-color: #ff773e;
-                                   color: white;
-                                   border: none;
-                                   border-radius: 6px;
-                                   padding: 6px 12px;
-                                   min-width: 0px;
-                                   font-size: 18px;
-                               }
-                               QPushButton:hover {
-                                   border: 1px solid #000000;
-                                   font-style: bold;
-                                   color: black;
-                               }""")
+           QPushButton {
+               background-color: #ff773e;
+               color: white;
+               border: none;
+               border-radius: 6px;
+               padding: 6px 12px;
+               min-width: 0px;
+               font-size: 18px;
+           }
+           QPushButton:hover {
+               border: 1px solid #000000;
+               font-style: bold;
+               color: black;
+           }""")
         confirm_button_layout = QHBoxLayout()
         confirm_button_layout.addStretch()  # left spacer
         confirm_button_layout.addWidget(self.confirm_button)
@@ -278,6 +278,53 @@ class InputApp(QWidget):
         popup = QDialog(self)
         popup.setWindowTitle("Usage Guide")
         popup.resize(500, 400)
+        layout = QVBoxLayout()
+
+        viewer = QTextBrowser()
+        viewer.setOpenExternalLinks(True)
+        viewer.setHtml("""
+            <h3>For a full guide visit: </h3><a href="https://github.com/techno-user314/suntide/">https://github.com/techno-user314/suntide/</a>
+            <br>
+            <h3 id="adjusting-settings">Adjusting Settings</h3>
+            <p>There are four settings that can be adjusted in the program that determine what data is compiled for the spreadsheets.
+            <img src="/screenshots/Program_Screenshot.png" alt="Screenshot of SunTide program window"></p>
+            <ol>
+            <li><strong>The year</strong><ul>
+            <li>Effect: Determines what time window the program pulls data for.</li>
+            <li>Range: Either the current year or next year.</li>
+            </ul>
+            </li>
+            <li><strong>Coordinates for sunrise/set predictions</strong><ul>
+            <li>Effect: Determines what point on Earth to use to find sun times.</li>
+            <li>Range: Latitude range is -90 through 90, longitude is -180 through 180. <a href="https://gps-coordinates.org/">Find your location</a>.</li>
+            </ul>
+            </li>
+            <li><strong>Convert time to timezone</strong><ul>
+            <li>Effect: Puts all times in the timezone specified.</li>
+            <li>Range: Any timezone</li>
+            </ul>
+            </li>
+            <li><p><strong>NOAA station ID&#39;s for tide predictions</strong></p>
+            <ul>
+            <li>Effect: Determines what stations will be asked for tide data. </li>
+            <li>Range: Any number of NOAA tide prediction stations, listed by their ID number. <a href="https://tidesandcurrents.noaa.gov/tide_predictions.html">Full list of stations</a>.</li>
+            </ul>
+            </li>
+            </ol>
+            <h3 id="compiling-the-data">Compiling the data</h3>
+            <ol>
+            <li>Once the settings are to your liking, click the &#39;Generate Spreadsheets&#39; button.</li>
+            <li>The program will take 2-5 minutes to compile the data, and will save the spreadsheets in the same folder that the program is located in.</li>
+            </ol>
+            """)
+        layout.addWidget(viewer)
+
+        close_button = QPushButton("Close")
+        close_button.clicked.connect(popup.close)
+        layout.addWidget(close_button)
+
+        popup.setLayout(layout)
+
         popup.show()
 
     def open_contribute(self):
