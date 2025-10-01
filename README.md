@@ -4,7 +4,16 @@
 A program to generate .csv files with data containing day-by-day tide predictions and daylight information for a given year.  
    
 ## Usage Guide
-After [installing](#Installation), run the program.
+### Setup
+1. Install SunTide, see [Installation](#Installation) for details.  
+2. If installing from a release (recommended), unzip the release download onto your desktop.
+3. If you have a pre-existing config file, put that into the unzipped folder on the desktop.
+  
+### Adjusting Settings
+
+### Compiling the data
+1. Once the settings are to your liking, click the 'Generate Spreadsheets' button.
+2. The program will take 2-5 minutes to compile the data, and will save the spreasheets in the same folder that the program is located in.
   
 ## The Output  
 > [!CAUTION]
@@ -46,15 +55,16 @@ Headers with suffix 1 in this example would corrospond to the first location giv
 
 ## Installation
 
-### Quick Install (From binary)
-1. Go to the [releases page]().
-2. Install the most recent binary for your system.
-3. ...
+### Quick Install (From release)
+1. Go to the [releases page](https://github.com/techno-user314/suntide/releases/).
+2. Download the appropriate .zip file for your system.
+3. Unpack the zip file to your desktop (or wherever you want the program located).
+4. You can now use the program. 
 
 ### Manual Install (From source)
 Recommended for developers only.
 1. Ensure [Python](https://www.python.org/downloads/) is installed.
 2. Install dependancies:
-   - `pip install pandas requests pytz`
+   - `pip install pandas requests pytz PyQt6`
 3. Clone this repository.
-4. ...
+4. Either compile into an executable, or run main.py directly with a Python interperator (3.11+)
