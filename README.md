@@ -80,7 +80,7 @@ Headers with suffix 1 in this example would corrospond to the first location giv
 1. Go to the [releases page](https://github.com/techno-user314/suntide/releases/).
 2. Download the appropriate .zip file for your system.
 3. Unpack the zip file to your desktop (or wherever you want the program located).
-4. You can now use the program. 
+4. Run the program by opening the SunTide executable, in the unpacked folder.
 
 ### Manual Install (From source)
 Recommended for developers only.
