@@ -1,5 +1,5 @@
 # SunTide  :sunny: :ocean:  
-<sup> v4.0.0 </sup>  
+<sup> v4.0.1 </sup>  
   
 A program to generate .csv files with data containing day-by-day tide predictions and daylight information for a given year.  
    
