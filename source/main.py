@@ -64,6 +64,7 @@ class InputApp(QWidget):
                /* Global background */
                QWidget {
                    background-color: #eeeeee; 
+                   color: #000;
                    font-size: 12pt;
                }
         
