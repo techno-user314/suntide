@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SunTide</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    
+    html {
+      font-family: sans-serif;
+    }
+    
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: linear-gradient(to bottom right, #ffffff 0%, #0077b6 100%);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    header {
+      background: #0077b6;
+      color: white;
+      margin: 0.4vw;
+      padding-left: 50px;
+      border-top-left-radius: 25px;
+      border-top-right-radius: 25px;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      text-align: left;
+    }
+
+    main {
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-y: auto;
+      padding: 1rem;
+      gap: 1rem;
+    }
+
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .footer-links {
+      display: flex;
+      gap: 2rem; /* space between links */
+      margin-top: 0.5rem;
+    }
+    .footer-links a {
+      color: #f8fafc;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover {
+      color: #facc15; /* yellow accent on hover */
+    }
+    .footer-separator {
+      width: 90%;
+      height: 2px;
+      border: 0;
+      background-color: #555; /* subtle gray line */
+      margin: 0.5rem 0;
+    }
+    
+    .date {
+      background: white;
+      width: 90%;
+      max-width: 900px;
+      height: 80px; /* fixed height */
+      margin-bottom: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      z-index: 2;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+    .date input[type="date"] {
+      height: 40px;
+      padding: 0 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    .card {
+      height: 900px;
+      width: 90%;
+      max-width: 900px;
+      border-radius: 10px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s;  
+      margin-bottom: 2rem;
+    }
+    .card.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card-face {
+      background: white;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      backface-visibility: hidden;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      box-sizing: border-box;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    
+    .card-front {}
+
+    .card-back {
+      transform: rotateY(180deg);
+    }
+
+    button {
+      background: white;
+      border: solid 1px #000;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #e2e8f0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌞 SunTide</h1>
+  </header>
+
+  <main>
+    <div class="date">
+      <input type="date" id="date-picker"/>
+      <button id="load-data">Load Date</button>
+    </div>
+    
+    <div class="card" id="flipCard">
+      <div class="card-face card-front">
+        <h2>📅 ${data.date}</h2>
+        <p>🌅 <b>Sunrise:</b> ${data.sunrise}</p>
+        <p>🌇 <b>Sunset:</b> ${data.sunset}</p>
+        <p>☀️ <b>Daylight Duration:</b> ${data.daylight}</p>
+        <p>📉 <b>Difference from Yesterday:</b> ${data.difference}</p>
+
+        <h3>🌊 Tides</h3>
+        <table>
+          <tr><th>Event</th><th>Time</th><th>Height</th></tr>
+          ${data.tides.map(t => `<tr><td>${t.event}</td><td>${t.time}</td><td>${t.height}</td></tr>`).join("")}
+        </table>
+        <button onclick="flipCard()">Flip Over</button>
+      </div>
+      <div class="card-face card-back">
+        <h2>Back Side</h2>
+        <button onclick="flipCard()">Flip Back</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="#profile">Creator Profile</a>
+      <a href="#about">About the Site</a>
+      <a href="#download">Desktop App</a>
+    </div>
+    <hr class="footer-separator" />
+    <p style="font-size: 0.85rem; color: #ccc;">
+      ©2025 Zach Harwood<br>
+      By using this site and/or the data provided by this site, you acknowledge and agree the the Terms of Service.
+    </p>
+  </footer>
+  
+  <script>
+    const flipCardEl = document.getElementById('flipCard');
+
+    function flipCard() {
+      flipCardEl.classList.toggle('flipped');
+    }
+
+    // Smoothly match the card height to the tallest side
+    function adjustCardHeight() {
+      const front = flipCardEl.querySelector('.card-front');
+      const back = flipCardEl.querySelector('.card-back');
+      const maxHeight = Math.max(front.scrollHeight, back.scrollHeight);
+      flipCardEl.style.height = maxHeight + 'px';
+    }
+
+    // Run on load and on resize
+    window.addEventListener('load', adjustCardHeight);
+    window.addEventListener('resize', adjustCardHeight);
+  </script>
+</body>
+</html>
+
