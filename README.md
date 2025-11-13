@@ -53,7 +53,8 @@ One row per day. The column headers are as follows:
 - Diff - The change in daylight from yesterday (hrs:mins:secs)
 - More/Less - If the change was positive or negative  
 > [!NOTE]
-> Daylight related times are calculated using the U.S. Naval Observeratory's algorithm.
+> Daylight related times are calculated using the U.S. Naval Observeratory's algorithm
+> and are a port of [https://github.com/Triggertrap/sun-js](https://github.com/Triggertrap/sun-js)
   
 ### The Tides CSV
 ![Screenshot of output for tides spreadsheet](/screenshots/Tide_Output.png)
