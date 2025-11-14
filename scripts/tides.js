@@ -66,3 +66,49 @@ async function getTides(stationId, dateStart, dateEnd) {
     const data = await response.json();
     return data.predictions;
 }
+
+async function getNextTides(stationId, date, period) {
+    if (!(date instanceof Date)) {
+        throw new Error("'date' must be a Date object.");
+    }
+
+    // Determine broadcast window
+    let windowStart, windowEnd;
+
+    if (period === 0) {  
+        // Morning: 07:08–11:08
+        windowStart = new Date(date);
+        windowStart.setHours(7, 8, 0, 0);
+
+        windowEnd = new Date(date);
+        windowEnd.setHours(11, 8, 0, 0);
+
+    } else if (period === 1) {  
+        // Evening: 18:08–22:08
+        windowStart = new Date(date);
+        windowStart.setHours(18, 8, 0, 0);
+
+        windowEnd = new Date(date);
+        windowEnd.setHours(22, 8, 0, 0);
+    } else {
+        throw new Error("Invalid period. Use 0 for morning or 1 for evening.");
+    }
+
+    // Fetch tides for 2-day span
+    const dayAfter = new Date(date);
+    dayAfter.setDate(dayAfter.getDate() + 1);
+
+    const tides = await getTides(stationId, date, dayAfter);
+
+    // Convert NOAA strings to Date objects
+    const events = tides.map(t => ({
+        ...t,
+        time: new Date(t.t)
+    }));
+
+    // Select tides in/after window
+    const matching = events.filter(e => e.time >= windowStart);
+
+    // Return the next three
+    return matching.slice(0, 3);
+}
