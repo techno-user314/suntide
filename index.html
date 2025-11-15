@@ -203,7 +203,7 @@
       flipCardEl.classList.toggle('flipped');
     }
 
-    // Smoothly match the card height to the tallest side
+    // Match the card height to the tallest side
     function adjustCardHeight() {
       const front = flipCardEl.querySelector('.card-front');
       const back = flipCardEl.querySelector('.card-back');
@@ -215,6 +215,16 @@
     window.addEventListener('load', adjustCardHeight);
     window.addEventListener('resize', adjustCardHeight);
   </script>
+  <script>
+    function getDaylightInfo(sunriseToday, sunsetToday, sunriseYesterday, sunsetYesterday) {
+        const daylightToday = sunsetToday - sunriseToday;
+        const daylightYesterday = sunsetYesterday - sunriseYesterday;
+        const daylightDifference = daylightToday - daylightYesterday;
+    
+        return {daylightToday, daylightYesterday, daylightDifference};
+    }
+  </script>
+  <script src="scripts/tides.js"></script>
+  <script src="scripts/sun.js"></script>
 </body>
 </html>
-
