@@ -67,7 +67,7 @@ async function getTides(stationId, dateStart, dateEnd) {
     return data.predictions;
 }
 
-async function getNextTides(stationId, date, period) {
+export async function getNextTides(stationId, date, period) {
     if (!(date instanceof Date)) {
         throw new Error("'date' must be a Date object.");
     }
