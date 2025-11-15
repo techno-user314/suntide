@@ -18,7 +18,7 @@ export async function getSunTideData(date, timeOfDay) {
   const daylightDifference = daylightDuration - yesterdayDuration;
 
   // --- Tides for all station IDs ---
-  const stationIds = {9466477, 9465831, 8467373};
+  const stationIds = [9466477, 9465831, 8467373];
   const tidesByStation = {};
   for (const id of stationIds) {
     tidesByStation[id] = await getNextTides(id, date, timeOfDay);
